@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/audio.js"></script>
+    <title>Drun Roll</title>
+</head>
+<body>
+<!-- GOLDEN -->
+<div class="container">
+    <ul>
+        <li><div data-key="71" class="key">
+            <kbd>G</kbd> 
+            <span class="sound">Relaxation</span>
+        </div></li>
+        <li> <div data-key="79" class="key">
+            <kbd>O</kbd>
+            <span class="sound">Sea</span>
+        </div>
+    </li>
+        <li><div data-key="76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">Forest</span>
+        </div>
+    </li>
+        <li><div data-key="68" class="key"
+            ><kbd>D</kbd>
+            <span class="sound">Koto</span>
+        </div>
+    </li>
+        <li><div data-key="69" class="key">
+            <kbd>E</kbd>
+                <span class="sound">Drum</span>
+                </div></li>
+        <li><div data-key="78" class="key">
+            <kbd>N</kbd>
+            <span class="sound">Ambient</span>
+        </div>
+    </li>
+    </ul>
+        
+</div>
+
+   
+    
+    
+    
+    
+   <!-- audio -->
+   <audio data-key="71" src="audio/music-for-relaxation.mp3"></audio>
+   <audio data-key="79" src="audio/Sea-sound.mp3"></audio>
+   <audio data-key="76" src="audio/relaxing-forest.mp3"></audio>
+   <audio data-key="68" src="audio/koto.mp3"></audio>
+   <audio data-key="69" src="audio/drum-roll.mp3"></audio>
+   <audio  data-key="78" src="audio/night-ambience.mp3"></audio>
+
+
+   <script>
+     function playsound(e){
+   const audio=document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key=document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    console.log(audio);
+
+    if(!audio){
+    //    alert("Please Enter The Given Alphabets");
+       return;
+    }
+    audio.currenTime=0;
+    audio.play()
+    key.classList.add('playing')
+    
+}
+
+function removeTransition(e) {
+    if(e.propertyName!=='transform')return ;//skip if it's not a transform
+    this.classList.remove('playing')
+    // console.log(e)
+}
+
+const ke=document.querySelectorAll('.key');
+ke.forEach(key => key.addEventListener('transitionend',removeTransition));
+
+window.addEventListener('keydown',playsound)
+   </script>
+     
+</body>
+</html>
